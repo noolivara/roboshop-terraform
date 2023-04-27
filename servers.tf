@@ -9,7 +9,7 @@ output "frontend"{
 }
 
 output "ami"{
-  value = data.aws_iam.centos.id
+  value = data.aws_ami.centos.image_id
 }
 
 resource "aws_instance" "frontend" {
