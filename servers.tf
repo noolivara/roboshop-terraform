@@ -4,8 +4,9 @@ data "aws_ami" "centos" {
   name_regex  = "Centos-8-DevOps-Practice"
 }
 
+
 resource "aws_instance" "frontend" {
-  ami           = aws_instance.frontend.public_ip
+  ami           = data.aws_ami.centos.image_id
   instance_type = "t3.micro"
 
   tags = {
@@ -15,7 +16,7 @@ resource "aws_instance" "frontend" {
 
 
 resource "aws_instance" "mongodb" {
-  ami           = aws_instance.frontend.public_ip
+  ami           = data.aws_ami.centos.image_id
   instance_type = "t3.micro"
 
   tags = {
@@ -23,7 +24,7 @@ resource "aws_instance" "mongodb" {
   }
 }
 resource "aws_instance" "catalogue" {
-  ami           = aws_instance.frontend.public_ip
+  ami           = data.aws_ami.centos.image_id
   instance_type = "t3.micro"
 
   tags = {
