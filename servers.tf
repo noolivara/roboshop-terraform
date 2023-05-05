@@ -8,13 +8,7 @@
  // }
 //}
 
-resource "aws_route53_record" "records" {
-  zone_id = "Z03986262CQPCHNJNZM9L"
-  name    = "${var.components[count.index]}-dev.rdevopsb72.online"
-  type    = "A"
-  ttl     = 30
-  records = [aws_instance.instances.private_ip]
-}
+
 
 resource "aws_instance" "instances" {
   count = length(var.components)
@@ -25,6 +19,15 @@ resource "aws_instance" "instances" {
   tags = {
     Name = var.components[count.index]
   }
+}
+
+
+resource "aws_route53_record" "records" {
+  zone_id = "Z03986262CQPCHNJNZM9L"
+  name    = "${var.components[count.index]}-dev.rdevopsb72.online"
+  type    = "A"
+  ttl     = 30
+  records = [aws_instance.instances.private_ip]
 }
 
 
