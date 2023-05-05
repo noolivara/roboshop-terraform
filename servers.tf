@@ -1,12 +1,12 @@
-resource "aws_instance" "frontend" {
-  ami           = data.aws_ami.centos.image_id
-  instance_type = "t3.micro"
-  vpc_security_group_ids = [data.aws_security_group.selected.id]
+//resource "aws_instance" "frontend" {
+  //ami           = data.aws_ami.centos.image_id
+  //instance_type = "t3.micro"
+  //vpc_security_group_ids = [data.aws_security_group.selected.id]
 
-  tags = {
-    Name = "frontend"
-  }
-}
+  //tags = {
+    //Name = "frontend"
+ // }
+//}
 
 //resource "aws_route53_record" "www" {
   //zone_id = aws_route53_zone.primary.zone_id
@@ -20,6 +20,7 @@ resource "aws_instance" "instances" {
   count = length(var.components)
   ami           = data.aws_ami.centos.image_id
   instance_type = var.instancetype
+  vpc_security_group_ids = [data.aws_security_group.selected.id]
 
   tags = {
     Name = var.components[count.index]
